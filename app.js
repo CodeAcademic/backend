@@ -4,7 +4,7 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message:'Hello Bro'})
+  res.status(200).json({ message: "Hello Bro" });
 });
 
 app.post("/", (req, res) => {
@@ -12,6 +12,6 @@ app.post("/", (req, res) => {
   res.send("Hello posts");
 });
 
-const PORT = 8080
+const PORT = 8080;
 
-app.listen(PORT, () => console.log(`Listening on - http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`Listening on - http://localhost:${PORT}`));
