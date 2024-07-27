@@ -14,7 +14,9 @@
   "author": "Jaloliddin Mamarasulov",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "mongoose": "^8.5.1",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
