@@ -2,12 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const postRoute = require('./src/routes/post.route')
+const fileUpload = require('express-fileupload')
+const path = require('path')
 
 const app = express();
 app.use(express.json());
+app.use(fileUpload({}))
 
 // Routes 
 app.use("/api/post", require('./src/routes/post.route'));
+// app.use("/static", express.static(path.join(__dirname, "static")));
 
 const PORT = process.env.PORT || 3000;
 

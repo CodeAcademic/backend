@@ -1,8 +1,10 @@
 const postModel = require("../models/post.model");
+const fileService = require("./file.service");
 
 class PostService {
-  async create(post) {
-    const newPost = await postModel.create(post);
+  async create(post, picture) {
+    const fileName = fileService.save(picture)
+    const newPost = await postModel.create({...post, picture: fileName});
     return newPost;
   }
 
@@ -20,8 +22,17 @@ class PostService {
     if (!id) {
       throw new Error("Id is not defined");
     }
+    const isPost = await this.getOne(id)
+    if (!isPost) {
+      throw new Error('Post with existing ID not found')
+    }
     const updateData = await postModel.findByIdAndUpdate(id, post);
     return updateData;
+  }
+
+  async getOne(id) {
+    const post = await postModel.findById(id)
+    return post
   }
 }
 

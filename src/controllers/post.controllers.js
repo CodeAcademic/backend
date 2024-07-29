@@ -1,4 +1,3 @@
-const postModel = require("../models/post.model");
 const postService = require("../server/post.service");
 
 class PostController {
@@ -13,7 +12,8 @@ class PostController {
 
   async create(req, res) {
     try {
-      const post = await postService.create(req.body);
+      console.log(req.files)
+      const post = await postService.create(req.body, req.files.picture);
       res.status(201).json(post);
     } catch (error) {
       res.status(500).json(error);
@@ -36,6 +36,15 @@ class PostController {
       res.status(200).json(post);
     } catch (error) {
       res.status(500).json(error);
+    }
+  }
+
+  async getOne(req, res) {
+    try {
+      const post = await postService.getOne(req.params.id)
+      res.status(200).json(post)
+    } catch (error) {
+      res.status(500).json(error)
     }
   }
 }
