@@ -3,7 +3,7 @@ const fs = require('fs')
 const path = require('path')
 
 class FileService {
-    save(fiel) {
+    save(file) {
         try {
             const fileName = uuidv4() + '.jpg'
             const currentDir = __dirname

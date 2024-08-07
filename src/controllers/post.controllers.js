@@ -1,4 +1,4 @@
-const postService = require("../server/post.service");
+const postService = require("../service/post.service");
 
 class PostController {
   async getAll(req, res) {
@@ -12,11 +12,13 @@ class PostController {
 
   async create(req, res) {
     try {
-      console.log(req.files)
       const post = await postService.create(req.body, req.files.picture);
       res.status(201).json(post);
     } catch (error) {
-      res.status(500).json(error);
+      console.log(error);
+      res
+        .status(500)
+        .json({ error: error.message, msg: "Internal server error!" });
     }
   }
 
@@ -41,10 +43,10 @@ class PostController {
 
   async getOne(req, res) {
     try {
-      const post = await postService.getOne(req.params.id)
-      res.status(200).json(post)
+      const post = await postService.getOne(req.params.id);
+      res.status(200).json(post);
     } catch (error) {
-      res.status(500).json(error)
+      res.status(500).json(error);
     }
   }
 }

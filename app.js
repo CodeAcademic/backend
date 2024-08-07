@@ -1,17 +1,24 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
-const postRoute = require('./src/routes/post.route')
-const fileUpload = require('express-fileupload')
-const path = require('path')
+const fileUpload = require("express-fileupload");
+const requestTime = require("./src/middlewares/request-time");
+const cookieParser = require('cookie-parser')
 
 const app = express();
-app.use(express.json());
-app.use(fileUpload({}))
 
-// Routes 
-app.use("/api/post", require('./src/routes/post.route'));
-// app.use("/static", express.static(path.join(__dirname, "static")));
+app.use(requestTime);
+app.use(express.json());
+app.use(fileUpload({
+  
+}));
+app.use(cookieParser({}))
+app.use(express.static("static"));
+
+
+// Routes
+app.use("/api/post", require("./src/routes/post.route"));
+app.use("/api/auth", require("./src/routes/auth.route"));
 
 const PORT = process.env.PORT || 3000;
 
